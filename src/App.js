@@ -11,6 +11,34 @@ function App() {
   const url = "http://hn.algolia.com/api/v1/";
   const queryParams = "search?query=";
 
+  function arrayIsEmpty(array) {
+    if (!Array.isArray(array)) {
+      return false;
+    }
+
+    if (array.length == 0) {
+      return true;
+    }
+
+    return false;
+  }
+
+  const List = () => {
+    if (loading) {
+      return <p>Loading ...</p>;
+    } else if (arrayIsEmpty(news)) {
+      return <p>No Results Found ...</p>;
+    } else {
+      return (
+        <ul>
+          {news.map((item) => (
+            <li key={item.objectID}>{item.title}</li>
+          ))}
+        </ul>
+      );
+    }
+  };
+
   useEffect(() => {
     const fetchNews = async () => {
       const endpoint = `${url}${queryParams}${wordQuery}`;
@@ -47,16 +75,7 @@ function App() {
           placeholder="Search Hacker News ..."
         />
       </div>
-
-      <div>
-        {(loading && <p>Loading ...</p>) || (
-          <ul>
-            {news.map((item) => (
-              <li key={item.objectID}>{item.title}</li>
-            ))}
-          </ul>
-        )}
-      </div>
+      <div>{List()}</div>
     </div>
   );
 }
