@@ -11,22 +11,10 @@ function App() {
   const url = "http://hn.algolia.com/api/v1/";
   const queryParams = "search?query=";
 
-  function arrayIsEmpty(array) {
-    if (!Array.isArray(array)) {
-      return false;
-    }
-
-    if (array.length == 0) {
-      return true;
-    }
-
-    return false;
-  }
-
   const List = () => {
     if (loading) {
       return <p>Loading ...</p>;
-    } else if (arrayIsEmpty(news)) {
+    } else if (news.length == 0) {
       return <p>No Results Found ...</p>;
     } else {
       return (
