@@ -13,9 +13,6 @@ function App() {
 
   useEffect(() => {
     const fetchNews = async () => {
-      const wordQuery = "React";
-      // const wordQuery = inputField.value
-      // const wordQuery = event => event.target.value
       const endpoint = `${url}${queryParams}${wordQuery}`;
       try {
         setLoading(true);
@@ -23,7 +20,7 @@ function App() {
         if (res.ok) {
           const data = await res.json();
           console.log("Data", data);
-          setNews(data);
+          setNews(data.hits);
           setLoading(false);
         }
         console.error("Fetch error!");
@@ -44,7 +41,7 @@ function App() {
       <div>
         <label>Search:</label>
         <input
-          onChange={() => setWordQuery}
+          onChange={(event) => setWordQuery(event.target.value)}
           type="text"
           placeholder="Search Hacker News ..."
         />
@@ -53,9 +50,9 @@ function App() {
       <div>
         {(loading && <p>Loading ...</p>) || (
           <ul>
-            {/* {news.map((item) => (
+            {news.map((item) => (
               <li key={item.id}>{item.title}</li>
-            ))} */}
+            ))}
           </ul>
         )}
       </div>
