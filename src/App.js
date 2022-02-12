@@ -1,7 +1,5 @@
 import "./App.css";
 import React, { useState, useEffect } from "react";
-// import Form from "./components/Form/Form";
-// import List from "./components/List/List";
 
 function App() {
   const [news, setNews] = useState([]);
@@ -35,7 +33,6 @@ function App() {
         const res = await fetch(endpoint, { cache: "no-cache" });
         if (res.ok) {
           const data = await res.json();
-          console.log("Data", data);
           setNews(data.hits);
           setLoading(false);
         } else {
@@ -45,8 +42,6 @@ function App() {
         console.log(e.message);
       }
     };
-
-    console.log("News", news);
 
     fetchNews();
   }, [wordQuery]);
