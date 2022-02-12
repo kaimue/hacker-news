@@ -22,8 +22,9 @@ function App() {
           console.log("Data", data);
           setNews(data.hits);
           setLoading(false);
+        } else {
+          console.error("Fetch error!");
         }
-        console.error("Fetch error!");
       } catch (e) {
         console.log(e.message);
       }
@@ -51,7 +52,7 @@ function App() {
         {(loading && <p>Loading ...</p>) || (
           <ul>
             {news.map((item) => (
-              <li key={item.id}>{item.title}</li>
+              <li key={item.objectID}>{item.title}</li>
             ))}
           </ul>
         )}
