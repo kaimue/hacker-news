@@ -25,11 +25,14 @@ function App() {
         <>
           <ul class="list-group">
             {currItems.map((item) => (
-              <li
-                class="list-group-item list-group-item-action"
-                key={item.objectID}
-              >
-                <a href={item.url}>{item.title}</a>
+              <li class="list-group-item" key={item.objectID}>
+                <p>{item.title}</p>
+                <a
+                  href={item.url}
+                  class="list-group-item list-group-item-action, link-text-small"
+                >
+                  Go to Page ...
+                </a>
               </li>
             ))}
           </ul>
@@ -48,14 +51,16 @@ function App() {
                 <a
                   class="page-link"
                   onClick={() => setCurrPage(number)}
-                  href={`page-${number}`}
+                  href={`${number}`}
                 >
                   {number}
                 </a>
               </li>
             ))}
             <li class="page-item">
-              <a class="page-link">Next</a>
+              <a class="page-link" href={`page-${1}`}>
+                Next
+              </a>
             </li>
           </ul>
         </>
